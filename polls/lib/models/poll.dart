@@ -1,3 +1,8 @@
+// Copyright (c) 2018 Diogo Nunes
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 import 'package:polls/models/option.dart';
 
 class Poll {
