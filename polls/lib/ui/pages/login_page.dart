@@ -29,26 +29,76 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TextField(
-                decoration: InputDecoration(labelText: "email"),
-                onChanged: (t) => email = t,
+              new Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: TextField(
+                  decoration:
+                      _buildInputDecoration(context, placeholder: "email"),
+                  onChanged: (t) => email = t,
+                ),
               ),
-              TextField(
-                decoration: InputDecoration(labelText: "password"),
-                onChanged: (t) => password = t,
-                obscureText: true,
+              new Padding(
+                padding: const EdgeInsets.only(bottom: 18.0),
+                child: TextField(
+                  decoration:
+                      _buildInputDecoration(context, placeholder: "password"),
+                  onChanged: (t) => password = t,
+                  obscureText: true,
+                ),
               ),
-              RaisedButton(
-                child: Text("Login"),
-                onPressed: () => userBloc.logUser.add(new LogUser(
-                      email.trim().toLowerCase(),
-                      password,
-                    )),
+              new Column(
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      RaisedButton(
+                        child: Text("register"),
+                        onPressed: () =>
+                            userBloc.registerUser.add(new SignInEmailPassword(
+                              email.trim().toLowerCase(),
+                              password,
+                            )),
+                      ),
+                      RaisedButton(
+                        child: Text("Login"),
+                        onPressed: () =>
+                            userBloc.logUser.add(new LogInEmailPassword(
+                              email.trim().toLowerCase(),
+                              password,
+                            )),
+                      ),
+                    ],
+                  ),
+                  new Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Center(
+                      child: RaisedButton(
+                        child: Text(
+                          "Google Sign in",
+                        ),
+                        onPressed: () =>
+                            userBloc.googleSignIn.add(DoGoogleSignIn()),
+                      ),
+                    ),
+                  ),
+                ],
               )
             ],
           ),
         ),
       ),
+    );
+  }
+
+  InputDecoration _buildInputDecoration(BuildContext context,
+      {String placeholder}) {
+    return InputDecoration(
+      labelText: placeholder,
+      border: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: Theme.of(context).primaryColor,
+              width: 1.0,
+              style: BorderStyle.solid)),
     );
   }
 

@@ -5,12 +5,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:polls/business/user/user_provider.dart';
+import 'package:polls/debug/logger.dart';
 import 'package:polls/ui/pages/login_page.dart';
 
 class App extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    startLogger();
     return new UserProvider(
       child: MaterialApp(
         title: 'Flutter Demo',
