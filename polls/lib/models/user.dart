@@ -3,9 +3,13 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-class User {
-  String id;
-  String name;
+import 'package:firebase_auth/firebase_auth.dart';
 
-  User({this.id, this.name});
+class User {
+  String get email => firebaseUser.email;
+  String get name => firebaseUser.displayName;
+
+  FirebaseUser firebaseUser;
+
+  User.fromFirebase(this.firebaseUser);
 }

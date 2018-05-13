@@ -6,17 +6,18 @@
 import 'package:flutter/widgets.dart';
 import 'package:polls/business/user/user_bloc.dart';
 
-class UserProvider extends InheritedWidget {
-  final UserBloc pollListBloc;
+class LogedUserProvider extends InheritedWidget {
+  final LogedUserBloc _userBloc;
 
-  UserProvider({Key key, UserBloc userBloc, Widget child})
-      : pollListBloc = userBloc ?? UserBloc(),
-        super(key: key, child: child);
+  LogedUserProvider(this._userBloc,
+      {Key key, LogedUserBloc userBloc, Widget child})
+      : super(key: key, child: child);
 
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) => true;
 
-  static UserBloc of(BuildContext context) =>
-      (context.inheritFromWidgetOfExactType(UserProvider) as UserProvider)
-          .pollListBloc;
+  static LogedUserBloc of(BuildContext context) =>
+      (context.inheritFromWidgetOfExactType(LogedUserProvider)
+              as LogedUserProvider)
+          ._userBloc;
 }

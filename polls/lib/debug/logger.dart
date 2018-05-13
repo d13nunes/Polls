@@ -18,5 +18,9 @@ void stopLogger() {
 }
 
 void log({String name, String value = "empty"}) {
-  runInDebug(() => _myTrace.putAttribute(name, value));
+  runInDebug(() {
+    int maxChars = 100;
+    var valuef = value.length > maxChars ? value.substring(0, maxChars) : value;
+    _myTrace.putAttribute(name, valuef);
+  });
 }
